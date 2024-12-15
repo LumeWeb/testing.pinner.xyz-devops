@@ -1,3 +1,9 @@
+locals {
+  placement_attributes = {
+    "lumeweb" = true
+  }
+}
+
 module "etcd" {
   source = "git::https://github.com/LumeWeb/terraform-modules.git//modules/coordination/etcd?ref=develop"
 
@@ -23,6 +29,8 @@ module "etcd" {
       unit  = "Gi"
       class = "beta3"
     }
+
+    placement_attributes = local.placement_attributes
   }
 }
 
@@ -53,6 +61,8 @@ module "mysql" {
       class = "beta3"
     }
   }
+
+  placement_attributes = local.placement_attributes
 }
 
 module "renterd" {
@@ -100,6 +110,8 @@ module "renterd" {
       class = "beta3"
     }
   }
+
+  placement_attributes = local.placement_attributes
 
   depends_on = [module.mysql]
 }
