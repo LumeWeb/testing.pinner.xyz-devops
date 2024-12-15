@@ -33,7 +33,7 @@ jobs:
           PROVIDERS=$(yq eval '.providers[].address' config/akash-providers.yaml | jq
           -R -s -c 'split("\n")[:-1]')
 
-          echo "provider_list=${PROVIDERS}" >> $GITHUB_OUTPUT
+          echo "PROVIDER_LIST=${PROVIDERS}" >> $GITHUB_ENV
       - uses: LumeWeb/digger-action@v0.1.1
         with:
           digger-spec: ${{ inputs.spec }}
