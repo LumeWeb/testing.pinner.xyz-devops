@@ -10,10 +10,6 @@ terraform {
 
 terraform {
   required_providers {
-    cloudflare = {
-      source = "cloudflare/cloudflare"
-      version = "5.0.0-alpha1"
-    }
     cloudns = {
       source = "ClouDNS/cloudns"
       version = "1.0.6"
@@ -27,8 +23,4 @@ terraform {
 
 provider "cloudns" {
 
-}
-
-provider "cloudflare" {
-  api_token = var.cloudflare_api_token
 }
