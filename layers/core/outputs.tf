@@ -23,3 +23,13 @@ output "renterd_s3_endpoint" {
   description = "Renterd service endpoint"
   value = module.renterd.s3_fqdn
 }
+
+output "base_domain" {
+  description = "Base domain for DNS records"
+  value = var.base_domain
+}
+
+output "environment" {
+  description = "Deployment environment"
+  value = var.environment
+}
