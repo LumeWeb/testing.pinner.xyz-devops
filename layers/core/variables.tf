@@ -17,19 +17,19 @@ variable "allowed_providers" {
   default     = []
 }
 
+variable "domain_zone" {
+  description = "ClouDNS zone for DNS records"
+  type        = string
+  default = "pinner.xyz"
+}
+
 # All sensitive credentials - no defaults
+# Database credentials
 variable "cloudflare_api_token" {
   description = "Cloudflare API token for DNS management"
   type        = string
   sensitive   = true
 }
-
-variable "domain_zone_id" {
-  description = "Cloudflare zone ID for DNS records"
-  type        = string
-}
-
-# Database credentials
 variable "etcd_root_password" {
   description = "Root password for etcd"
   type        = string
