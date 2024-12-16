@@ -14,11 +14,19 @@ terraform {
       source = "cloudflare/cloudflare"
       version = "5.0.0-alpha1"
     }
+    cloudns = {
+      source = "ClouDNS/cloudns"
+      version = "1.0.6"
+    }
     akash = {
       source = "registry.terraform.io/lumeweb/akash"
       version = "0.1.2"
     }
   }
+}
+
+provider "cloudns" {
+
 }
 
 provider "cloudflare" {
