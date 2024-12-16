@@ -25,11 +25,6 @@ variable "domain_zone" {
 
 # All sensitive credentials - no defaults
 # Database credentials
-variable "cloudflare_api_token" {
-  description = "Cloudflare API token for DNS management"
-  type        = string
-  sensitive   = true
-}
 variable "etcd_root_password" {
   description = "Root password for etcd"
   type        = string
