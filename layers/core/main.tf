@@ -1,9 +1,3 @@
-locals {
-  placement_attributes = {
-    "lumeweb" = true
-  }
-}
-
 module "etcd" {
   source = "git::https://github.com/LumeWeb/terraform-modules.git//modules/coordination/etcd?ref=develop"
 
@@ -77,7 +71,7 @@ module "renterd" {
   metrics_password = var.metrics_password
 
   dns = {
-    base_domain = var.base_domain
+    base_domain = local.node_domain
   }
 
   network = {
