@@ -1,6 +1,6 @@
 locals {
-  renterd_dns_name = replace(module.renterd.dns_fqdn,  format(".%s", var.base_domain), "")
-  renterd_s3_dns_name = replace(module.renterd.s3_fqdn, format(".%s", var.base_domain), "")
+  renterd_dns_name = replace(module.renterd.dns_fqdn,  format(".%s", var.domain_zone), "")
+  renterd_s3_dns_name = replace(module.renterd.s3_fqdn, format(".%s", var.domain_zone), "")
 }
 
 resource "cloudns_dns_record" "renterd" {
