@@ -1,75 +1,35 @@
-# MySQL Cluster
-module "mysql_cluster" {
-  source = "git::https://github.com/LumeWeb/terraform-modules.git//modules/db/mysql-cluster?ref=develop"
+# MySQL
 
-  cluster_name = "portal-mysql"
+module "mysql" {
+  source = "git::https://github.com/LumeWeb/terraform-modules.git//modules/db/mysql?ref=develop"
 
+  name              = "mysql"
+
+  root_password     = var.mysql_root_password
   environment  = local.environment
-  node_count = 2
+  backups_enabled   =  false
 
-  backups_enabled = false
-
-  root_password = var.mysql_root_password
-  repl_password = var.mysql_repl_password
-
-  # ETCD Configuration
-  etc_endpoints = [data.terraform_remote_state.remote_states.outputs.etcd_endpoint]
-
-  etc_password = data.terraform_remote_state.remote_states.outputs.etcd_password
-
-  # Resource Configuration
-  node_resources = {
-    cpu_units    = 2
-    memory_size  = 4
-    storage_size = 20
-  }
-
-  allowed_providers = var.allowed_providers
-  placement_attributes = local.placement_attributes
-}
-
-# ProxySQL
-module "proxysql" {
-  source = "git::https://github.com/LumeWeb/terraform-modules.git//modules/db/proxysql?ref=develop"
-
-  name = "portal-proxysql"
-
-  environment = local.environment
-  backup_enabled = false
-
-  admin_password = var.proxysql_admin_password
-
-  # Connect to ETCD
-  etcd = {
-    endpoints = [data.terraform_remote_state.remote_states.outputs.etcd_endpoint]
-    password  = data.terraform_remote_state.remote_states.outputs.etcd_password
-    prefix = module.mysql_cluster.cluster_prefix
-  }
-
-  mysql = {
-    repl_user = "repl"
-    repl_password = var.mysql_repl_password
-  }
-
-  # Resource Configuration
   resources = {
     cpu = {
-      cores = 1
+      cores = 2
     }
     memory = {
-      size = 1
+      size = 4
       unit = "Gi"
     }
     storage = {
       size = 10
       unit = "Gi"
     }
+    persistent_storage = {
+      size  = 20
+      unit  = "Gi"
+      class = "beta3"
+    }
   }
 
   allowed_providers = var.allowed_providers
   placement_attributes = local.placement_attributes
-
-  depends_on = [module.mysql_cluster]
 }
 
 # Renterd Cluster
@@ -90,7 +50,7 @@ module "renterd_cluster" {
   # MySQL Configuration via ProxySQL
   database = {
     type           = "mysql"
-    uri = format("%s:%d", module.proxysql.provider_host, module.proxysql.port)
+    uri = format("%s:%d", module.mysql.provider_host, module.mysql.port)
     password = var.mysql_root_password
   }
 
@@ -109,5 +69,5 @@ module "renterd_cluster" {
   allowed_providers = var.allowed_providers
   placement_attributes = local.placement_attributes
 
-  depends_on = [module.proxysql]
+  depends_on = [module.mysql]
 }

@@ -1,7 +1,7 @@
 
-output "proxysql_endpoint" {
+output "mysql_endpoint" {
   description = "MySQL service endpoint"
-  value = "${module.proxysql.provider_host}:${module.proxysql.port}"
+  value = "${module.mysql.provider_host}:${module.mysql.port}"
 }
 
 output "renterd_bus_endpoint" {
