@@ -2,6 +2,8 @@
 module "portal" {
   source = "git::https://github.com/LumeWeb/terraform-modules.git//modules/service/portal?ref=develop"
 
+  count = 1
+
   name = "portal"
 
   domain      = local.base_domain
