@@ -58,12 +58,12 @@ module "portal" {
 
   etcd = {
     endpoints = [local.core_state.etcd_endpoint]
-    username  = "root"
-    password  = local.core_state.etcd_root_password
+    username = "root"
+    password = local.core_state.etcd_root_password
   }
 
   redis = {
-    host     = module.redis.endpoint
+    address = module.redis.endpoint
     password = var.redis_password
   }
 
