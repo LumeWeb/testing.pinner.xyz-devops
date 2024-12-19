@@ -137,3 +137,11 @@ variable "portal_mail_from" {
   type        = string
   sensitive   = true
 }
+
+# Redis Configuration
+
+variable "redis_password" {
+  description = "Redis password"
+  type        = string
+  sensitive   = true
+}
