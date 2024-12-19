@@ -2,9 +2,7 @@
 module "portal" {
   source = "git::https://github.com/LumeWeb/terraform-modules.git//modules/service/portal?ref=develop"
 
-  count = 1
-
-  name = "portal-${count.index+1}"
+  name = "portal"
 
   domain      = local.base_domain
   portal_name = var.portal_name
@@ -58,16 +56,9 @@ module "portal" {
     name     = var.mysql_database
   }
 
-  etcd = {
-    host = local.core_state.etcd_endpoint
-    port = local.core_state.etcd_port
-    password = local.core_state.etcd_password
-  }
-
   redis = {
-    host     = local.core_state.redis_endpoint
-    port     = local.core_state.redis_port
-    password = local.core_state.redis_password
+    host     = module.redis.endpoint
+    password = var.redis_password
   }
 
   environment          = local.environment
