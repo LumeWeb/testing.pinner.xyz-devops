@@ -56,6 +56,12 @@ module "portal" {
     name     = var.mysql_database
   }
 
+  etcd = {
+    endpoints = [local.core_state.etcd_endpoint]
+    username  = "root"
+    password  = local.core_state.etcd_root_password
+  }
+
   redis = {
     host     = module.redis.endpoint
     password = var.redis_password
