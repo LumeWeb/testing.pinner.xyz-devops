@@ -5,4 +5,5 @@ locals {
   placement_attributes = {
     "lumeweb" = true
   }
+  s3_endpoint = data.terraform_remote_state.remote_states.outputs.renterd_s3_endpoint
 }

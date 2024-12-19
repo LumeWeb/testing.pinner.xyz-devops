@@ -36,7 +36,7 @@ module "portal" {
   storage = {
     s3 = {
       buffer_bucket = var.portal_buffer_bucket
-      endpoint      = var.portal_buffer_endpoint
+      endpoint      = local.s3_endpoint
       region        = var.portal_buffer_region
       access_key    = var.portal_buffer_access_key
       secret_key    = var.portal_buffer_secret_key
