@@ -84,15 +84,10 @@ variable "portal_buffer_bucket" {
   sensitive   = true
 }
 
-variable "portal_buffer_endpoint" {
-  description = "Portal buffer endpoint"
-  type        = string
-  sensitive   = true
-}
-
 variable "portal_buffer_region" {
   description = "Portal buffer region"
   type        = string
+  default       = "us-east-1"
 }
 
 variable "portal_buffer_access_key" {
