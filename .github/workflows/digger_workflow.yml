@@ -1,4 +1,3 @@
----
 name: Digger Workflow
 on:
   workflow_dispatch:
@@ -35,6 +34,7 @@ jobs:
 
           echo "PROVIDER_LIST=${PROVIDERS}" >> $GITHUB_ENV
       - uses: LumeWeb/digger-action@v0.1.1
+        id: digger
         with:
           digger-spec: ${{ inputs.spec }}
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -52,3 +52,24 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_ENDPOINT_URL: ${{ secrets.AWS_ENDPOINT_URL }}
           AWS_REGION: us-east-1
+      - name: Prepare debug files
+        if: failure()
+        run: |
+          if ls /tmp/deployment* 1> /dev/null 2>&1; then
+            mkdir -p $GITHUB_WORKSPACE/debug_files_${{ github.run_id }}
+            cp /tmp/deployment* $GITHUB_WORKSPACE/debug_files_${{ github.run_id }}/
+          else
+            echo "No deployment files found to upload"
+            exit 1
+          fi
+
+      - name: Upload debug files to S3
+        if: failure()
+        uses: koraykoska/s3-upload-github-action@master
+        env:
+          FILE: debug_files_${{ github.run_id }}
+          S3_ENDPOINT: ${{ secrets.AWS_ENDPOINT_URL }}
+          S3_BUCKET: ${{ secrets.AWS_BUCKET }}
+          S3_PREFIX: 'debug_files'  # This sets the base directory in the Space
+          S3_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          S3_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
