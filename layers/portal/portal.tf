@@ -59,7 +59,7 @@ module "portal" {
   etcd = {
     endpoints = [local.core_state.etcd_endpoint]
     username = "root"
-    password = local.core_state.etcd_root_password
+    password = local.core_state.etcd_password
   }
 
   redis = {
