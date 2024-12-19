@@ -108,6 +108,12 @@ variable "portal_mail_host" {
   sensitive   = true
 }
 
+variable "portal_mail_ssl" {
+  description = "Portal mail SSL"
+  type        = bool
+  default     = true
+}
+
 variable "portal_mail_username" {
   description = "Portal mail username"
   type        = string

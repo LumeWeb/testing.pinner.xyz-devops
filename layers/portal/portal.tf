@@ -31,6 +31,7 @@ module "portal" {
     username = var.portal_mail_username
     password = var.portal_mail_password
     from     = var.portal_mail_from
+    ssl      = var.portal_mail_ssl
   }
 
   storage = {
