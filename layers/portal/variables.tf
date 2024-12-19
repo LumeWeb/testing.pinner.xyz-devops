@@ -98,7 +98,7 @@ variable "portal_buffer_region" {
 variable "portal_buffer_access_key" {
   description = "Portal buffer access key"
   type        = string
-  sensitive   =
+  sensitive   = true
 }
 
 variable "portal_buffer_secret_key" {
@@ -110,7 +110,7 @@ variable "portal_buffer_secret_key" {
 variable "portal_mail_host" {
   description = "Portal mail host"
   type        = string
-  sensitive   =
+  sensitive   = true
 }
 
 variable "portal_mail_username" {
