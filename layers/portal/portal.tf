@@ -64,6 +64,12 @@ module "portal" {
     password = local.core_state.etcd_password
   }
 
+  redis = {
+    host     = local.core_state.redis_endpoint
+    port     = local.core_state.redis_port
+    password = local.core_state.redis_password
+  }
+
   environment          = local.environment
   placement_attributes = local.placement_attributes
   allowed_providers    = var.allowed_providers
