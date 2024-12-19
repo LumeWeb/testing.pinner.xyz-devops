@@ -58,6 +58,12 @@ module "portal" {
     name     = var.mysql_database
   }
 
+  etcd = {
+    host = local.core_state.etcd_endpoint
+    port = local.core_state.etcd_port
+    password = local.core_state.etcd_password
+  }
+
   environment          = local.environment
   placement_attributes = local.placement_attributes
   allowed_providers    = var.allowed_providers
