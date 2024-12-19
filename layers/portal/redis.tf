@@ -38,6 +38,5 @@ module "redis" {
   allowed_providers    = var.allowed_providers
   tags = {
     service = "redis"
-    environment = local.environment
   }
 }
