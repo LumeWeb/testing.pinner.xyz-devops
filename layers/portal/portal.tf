@@ -4,11 +4,11 @@ module "portal" {
 
   count = 1
 
-  name = "portal"
+  name = "portal-${count.index+1}"
 
-  domain = local.base_domain
-  portal_name = "portal"
-  port = 80
+  domain      = local.base_domain
+  portal_name = var.portal_name
+  port        = var.portal_port
 
   image = "ghcr.io/lumeweb/akash-portal:base-latest"
 
@@ -21,30 +21,30 @@ module "portal" {
       unit = "Gi"
     }
     storage = {
-      size = 10
+      size = 1
       unit = "Gi"
     }
   }
 
   mail = {
-    host     = "mail.example.com"
-    username = "username"
-    password = "password"
-    from     = "from@example.com"
+    host     = var.portal_mail_host
+    username = var.portal_mail_username
+    password = var.portal_mail_password
+    from     = var.portal_mail_from
   }
 
   storage = {
     s3 = {
-      buffer_bucket = "buffer-bucket"
-      endpoint     = "https://s3.example.com"
-      region       = "region"
-      access_key   = "access-key"
-      secret_key   = "secret-key"
+      buffer_bucket = var.portal_buffer_bucket
+      endpoint      = var.portal_buffer_endpoint
+      region        = var.portal_buffer_region
+      access_key    = var.portal_buffer_access_key
+      secret_key    = var.portal_buffer_secret_key
     }
     sia = {
-      key     = "sia-key"
-      cluster = false
-      url     = "https://sia.example.com"
+      key     = var.renterd_api_password
+      cluster = true
+      url     = "http://${module.renterd_cluster.bus.dns_fqdn}"
     }
   }
 
@@ -52,17 +52,13 @@ module "portal" {
     type     = "mysql"
     host     = module.mysql.provider_host
     port     = module.mysql.port
-    username = "username"
-    password = "password"
-    name     = "database"
+    username = "root"
+    password = var.mysql_root_password
+    name     = var.mysql_database
   }
 
-  environment = local.environment
+  environment          = local.environment
   placement_attributes = local.placement_attributes
-  allowed_providers = var.allowed_providers
-  tags = {
-    service = "portal"
-    environment = local.environment
-  }
+  allowed_providers    = var.allowed_providers
   extra_env_vars = {}
 }
