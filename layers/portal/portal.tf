@@ -10,6 +10,7 @@ module "portal" {
   domain      = local.base_domain
   portal_name = var.portal_name
   port        = var.portal_port
+  cluster     = true
 
   resources = {
     cpu = {
@@ -61,6 +62,7 @@ module "portal" {
     endpoints = [local.core_state.etcd_endpoint]
     username = "root"
     password = local.core_state.etcd_password
+    prefix   = "portal"
   }
 
   redis = {
