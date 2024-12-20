@@ -54,17 +54,20 @@ jobs:
           AWS_REGION: us-east-1
       - name: Prepare debug files
         if: failure()
+        id: prepare_debug
+        continue-on-error: true
         run: |
           if ls /tmp/deployment* 1> /dev/null 2>&1; then
             mkdir -p $GITHUB_WORKSPACE/debug_files_${{ github.run_id }}
             cp /tmp/deployment* $GITHUB_WORKSPACE/debug_files_${{ github.run_id }}/
+            echo "debug_files_exist=true" >> $GITHUB_OUTPUT
           else
             echo "No deployment files found to upload"
-            exit 1
+            echo "debug_files_exist=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Upload debug files to S3
-        if: failure()
+        if: failure() && steps.prepare_debug.outputs.debug_files_exist == 'true'
         uses: koraykoska/s3-upload-github-action@master
         env:
           FILE: debug_files_${{ github.run_id }}
