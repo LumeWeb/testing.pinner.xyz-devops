@@ -71,7 +71,7 @@ workflows:
         - name: TF_VAR_cloudns_auth_id
           value_from: CLOUDNS_AUTH_ID
         - name: TF_VAR_cloudns_auth_password
-          value_from: CLOUDNS_AUTH_PASSWORD
+          value_from: CLOUDNS_PASSWORD
     plan:
       steps:
         - run: |
