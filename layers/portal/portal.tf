@@ -5,12 +5,11 @@ module "portal" {
   count = 1
 
   name = "portal"
+  image = "ghcr.io/lumeweb/akash-portal:core-next"
 
   domain      = local.base_domain
   portal_name = var.portal_name
   port        = var.portal_port
-
-  image = "ghcr.io/lumeweb/akash-portal:base-latest"
 
   resources = {
     cpu = {
