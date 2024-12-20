@@ -68,6 +68,10 @@ workflows:
           value_from: PORTAL_RENTERD_SEED
         - name: TF_VAR_renterd_metrics_password
           value_from: PORTAL_RENTERD_METRICS_PASSWORD
+        - name: TF_VAR_cloudns_auth_id
+          value_from: CLOUDNS_AUTH_ID
+        - name: TF_VAR_cloudns_auth_password
+          value_from: CLOUDNS_AUTH_PASSWORD
     plan:
       steps:
         - run: |
