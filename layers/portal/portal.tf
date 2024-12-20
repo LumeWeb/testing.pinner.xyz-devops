@@ -71,5 +71,8 @@ module "portal" {
   environment          = local.environment
   placement_attributes = local.placement_attributes
   allowed_providers    = var.allowed_providers
-  extra_env_vars = {}
+  extra_env_vars = {
+    CLOUDNS_AUTH_ID: var.cloudns_auth_id
+    CLOUDNS_AUTH_PASSWORD: var.cloudns_auth_password
+  }
 }

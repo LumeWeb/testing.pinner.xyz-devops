@@ -145,3 +145,17 @@ variable "redis_password" {
   type        = string
   sensitive   = true
 }
+
+# DNS Configuration
+
+variable "cloudns_auth_id" {
+  description = "ClouDNS authentication ID"
+  type        = string
+  sensitive   = true
+}
+
+variable "cloudns_auth_password" {
+  description = "ClouDNS authentication password"
+  type        = string
+  sensitive   = true
+}
