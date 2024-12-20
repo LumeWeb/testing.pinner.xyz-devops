@@ -18,6 +18,9 @@ module "redis" {
       size = 1
       unit = "Gi"
     }
+    persistent_storage = {
+      size = 5
+    }
   }
 
   valkey_config = {
