@@ -56,6 +56,8 @@ module "portal" {
     username = "root"
     password = var.mysql_root_password
     name     = var.mysql_database
+    tls      = true
+    tls_skip_verify = true
   }
 
   etcd = {
