@@ -159,3 +159,9 @@ variable "cloudns_auth_password" {
   type        = string
   sensitive   = true
 }
+
+variable "ssl_email" {
+  description = "Email for SSL certificates"
+  type        = string
+  sensitive   = true
+}

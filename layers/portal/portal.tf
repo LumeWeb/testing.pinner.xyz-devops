@@ -77,4 +77,6 @@ module "portal" {
     CLOUDNS_AUTH_ID: var.cloudns_auth_id
     CLOUDNS_AUTH_PASSWORD: var.cloudns_auth_password
   }
+
+  ssl_email = var.ssl_email
 }
