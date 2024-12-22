@@ -1,10 +1,33 @@
+locals {
+  portal_instance_count = 1
+}
+# Portal Node IDs
+resource "random_bytes" "uuid_raw" {
+  count = local.portal_instance_count
+
+  length = 16
+  keepers = {
+    instance = count.index
+  }
+}
+
+data "external" "uuid_formatter" {
+  count = local.portal_instance_count
+
+  program = ["python3", "${path.module}/format_uuid.py"]
+
+  query = {
+    raw_bytes = random_bytes.uuid_raw[count.index].base64
+  }
+}
+
 # Portal
 module "portal" {
   source = "git::https://github.com/LumeWeb/terraform-modules.git//modules/service/portal?ref=develop"
 
-  count = 1
+  count = local.portal_instance_count
 
-  name = "portal"
+  name  = "portal"
   image = "ghcr.io/lumeweb/akash-portal:base-next-next"
 
   domain      = local.base_domain
@@ -50,13 +73,13 @@ module "portal" {
   }
 
   database = {
-    type     = "mysql"
-    host     = module.mysql.provider_host
-    port     = module.mysql.port
-    username = "root"
-    password = var.mysql_root_password
-    name     = var.mysql_database
-    tls      = true
+    type            = "mysql"
+    host            = module.mysql.provider_host
+    port            = module.mysql.port
+    username        = "root"
+    password        = var.mysql_root_password
+    name            = var.mysql_database
+    tls             = true
     tls_skip_verify = true
   }
 
@@ -67,7 +90,7 @@ module "portal" {
   }
 
   redis = {
-    address = module.redis.endpoint
+    address  = module.redis.endpoint
     password = var.redis_password
   }
 
@@ -75,8 +98,9 @@ module "portal" {
   placement_attributes = local.placement_attributes
   allowed_providers    = var.allowed_providers
   extra_env_vars = {
-    CLOUDNS_AUTH_ID: var.cloudns_auth_id
-    CLOUDNS_AUTH_PASSWORD: var.cloudns_auth_password
+    CLOUDNS_AUTH_ID       = var.cloudns_auth_id
+    CLOUDNS_AUTH_PASSWORD = var.cloudns_auth_password
+    PORTAL__CORE__NODE_ID        = data.external.uuid_formatter[count.index].result.uuid
   }
 
   ssl_email = var.ssl_email

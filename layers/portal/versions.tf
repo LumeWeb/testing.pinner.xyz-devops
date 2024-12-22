@@ -18,11 +18,25 @@ terraform {
       source  = "registry.terraform.io/lumeweb/akash"
       version = "0.1.3"
     }
+    external = {
+      source = "hashicorp/external"
+      version = "2.3.4"
+    }
+    random = {
+      source = "hashicorp/random"
+      version = "3.6.3"
+    }
   }
 }
 
 provider "cloudns" {
 
+}
+
+provider "external" {
+}
+
+provider "random" {
 }
 
 data "terraform_remote_state" "remote_states" {
