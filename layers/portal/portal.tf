@@ -5,7 +5,7 @@ module "portal" {
   count = 1
 
   name = "portal"
-  image = "ghcr.io/lumeweb/akash-portal:core-next"
+  image = "ghcr.io/lumeweb/akash-portal:base-next-next"
 
   domain      = local.base_domain
   portal_name = var.portal_name
