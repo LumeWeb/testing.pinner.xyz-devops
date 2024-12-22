@@ -81,7 +81,7 @@ variable "portal_domain" {
 variable "portal_port" {
   description = "Portal core port"
   type        = number
-  default     = 80
+  default     = 8080
 }
 
 variable "portal_buffer_bucket" {
