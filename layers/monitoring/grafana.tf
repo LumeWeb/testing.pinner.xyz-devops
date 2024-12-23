@@ -11,7 +11,7 @@ module "grafana" {
 
   database = {
     host     = module.mysql.provider_host
-    port     = module.mysql.provider_host
+    port     = module.mysql.port
     username = "root"
     password = var.mysql_root_password
     name     = "grafana"
