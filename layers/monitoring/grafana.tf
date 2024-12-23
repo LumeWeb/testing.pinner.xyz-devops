@@ -23,7 +23,7 @@ module "grafana" {
   placement_attributes = local.placement_attributes
   pricing_amount = 10000
 
-  cpu_units    = 1000
+  cpu_units    = 1
   memory_size  = 1
   memory_unit  = "Gi"
   storage_size = 10
