@@ -48,3 +48,42 @@ variable "metrics_password" {
   type        = string
   sensitive   = true
 }
+
+variable "aws_access_key_id" {
+  description = "AWS access key ID"
+  type        = string
+  sensitive   = true
+}
+
+variable "aws_secret_access_key" {
+  description = "AWS secret access key"
+  type        = string
+  sensitive   = true
+}
+
+variable "s3_bucket" {
+  description = "S3 bucket for backups"
+  type        = string
+}
+
+variable "aws_bucket" {
+  description = "AWS S3 bucket TF state"
+  type        = string
+}
+
+variable "s3_endpoint" {
+  description = "S3 endpoint"
+  type        = string
+}
+
+variable "aws_region" {
+  description = "AWS region"
+  type        = string
+}
+
+variable "prometheus_admin_password" {
+  description = "Prometheus admin password"
+  type        = string
+  sensitive   = true
+}
+
