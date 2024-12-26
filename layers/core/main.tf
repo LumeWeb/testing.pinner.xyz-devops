@@ -39,8 +39,6 @@ module "mysql" {
 
   metrics_enabled = true
   metrics_password = var.metrics_password
-  etcd_username = var.etcd_root_username
-  etcd_password = var.etcd_root_password
 
   metrics_service_name = "core-mysql"
 
@@ -62,6 +60,12 @@ module "mysql" {
       unit  = "Gi"
       class = "beta3"
     }
+  }
+
+  etcd = {
+    endpoints = [module.etcd.service.endpoints[0]]
+    username  = var.etcd_root_username
+    password  = var.etcd_root_password
   }
 
   placement_attributes = local.placement_attributes
