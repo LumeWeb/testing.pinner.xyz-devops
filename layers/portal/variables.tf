@@ -59,6 +59,12 @@ variable "renterd_metrics_password" {
   sensitive   = true
 }
 
+variable "metrics_password" {
+  description = "Password for os metrics"
+  type        = string
+  sensitive   = true
+}
+
 # DNS Configuration
 variable "domain_zone" {
   description = "ClouDNS zone for DNS records"

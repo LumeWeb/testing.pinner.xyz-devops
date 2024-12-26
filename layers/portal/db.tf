@@ -9,6 +9,11 @@ module "mysql" {
   environment  = local.environment
   backups_enabled   =  false
 
+  metrics_enabled = true
+  metrics_password = var.metrics_password
+  etcd_username = local.core_state.etcd_username
+  etcd_password = local.core_state.etcd_password
+
   resources = {
     cpu = {
       cores = 2

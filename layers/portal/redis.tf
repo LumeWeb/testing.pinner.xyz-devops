@@ -36,6 +36,13 @@ module "redis" {
     enabled = false
   }
 
+  metrics_enabled = true
+  metrics_password = var.metrics_password
+  etcd_username = local.core_state.etcd_username
+  etcd_password = local.core_state.etcd_password
+
+  metrics_service_name = "portal-redis"
+
   environment          = local.environment
   placement_attributes = local.placement_attributes
   allowed_providers    = var.allowed_providers
