@@ -78,6 +78,7 @@ module "renterd" {
 
   metrics_enabled = true
   metrics_password = var.metrics_password
+  etcd_endpoints = [module.etcd.service.endpoints[0]]
   etcd_username = var.etcd_root_username
   etcd_password = var.etcd_root_password
 
