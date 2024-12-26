@@ -40,6 +40,7 @@ module "redis" {
   metrics_password = var.metrics_password
   etcd_username = local.core_state.etcd_username
   etcd_password = local.core_state.etcd_password
+  etcd_endpoints = [local.core_state.etcd_endpoint]
 
   metrics_service_name = "portal-redis"
 
