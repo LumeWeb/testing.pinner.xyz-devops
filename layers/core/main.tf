@@ -37,6 +37,14 @@ module "mysql" {
   environment       = var.environment
   backups_enabled   =  false
 
+  metrics_enabled = true
+  metrics_password = var.metrics_password
+  etcd_username = var.etcd_root_username
+  etcd_password = var.etcd_root_password
+
+  metrics_service_name = "core-mysql"
+
+
   resources = {
     cpu = {
       cores = 2
@@ -68,7 +76,12 @@ module "renterd" {
   api_password = var.renterd_api_password
   seed         = var.renterd_seed
 
+  metrics_enabled = true
   metrics_password = var.metrics_password
+  etcd_username = var.etcd_root_username
+  etcd_password = var.etcd_root_password
+
+  metrics_service_name = "core-renterd"
 
   dns = {
     base_domain = local.node_domain

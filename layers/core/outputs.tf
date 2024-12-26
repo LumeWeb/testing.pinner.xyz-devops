@@ -9,6 +9,13 @@ output "etcd_password" {
   sensitive = true
 }
 
+output "etcd_username" {
+  description = "ETCD service password"
+  value = var.etcd_root_username
+  sensitive = true
+}
+
+
 output "mysql_endpoint" {
   description = "MySQL service endpoint"
   value = "${module.mysql.provider_host}:${module.mysql.port}"

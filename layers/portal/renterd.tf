@@ -11,7 +11,13 @@ module "renterd_cluster" {
   seed                = var.renterd_seed
   bus_api_password    = var.renterd_api_password
   worker_api_password = var.renterd_api_password
-  metrics_password = var.renterd_metrics_password
+
+  metrics_enabled = true
+  metrics_service_name = "portal-renterd"
+  metrics_password = var.metrics_password
+  etcd_username = local.core_state.etcd_username
+  etcd_password = local.core_state.etcd_password
+
 
   # MySQL Configuration via ProxySQL
   database = {
