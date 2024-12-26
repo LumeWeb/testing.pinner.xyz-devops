@@ -23,7 +23,7 @@ jobs:
 
           echo "PROVIDER_LIST=${PROVIDERS}" >> $GITHUB_ENV
       - name: digger destroy
-        uses: LumeWeb/digger-action@v0.1.2
+        uses: LumeWeb/digger-action@v0.1.3
         with:
           mode: manual
           command: "digger destroy"
