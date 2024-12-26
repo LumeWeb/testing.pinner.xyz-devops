@@ -9,8 +9,12 @@ module "mysql" {
 
   metrics_enabled = true
   metrics_password = var.metrics_password
-  etcd_username = local.core_state.etcd_username
-  etcd_password = local.core_state.etcd_password
+
+  etcd = {
+    endpoints = [local.core_state.etcd_endpoint]
+    username  = local.core_state.etcd_username
+    password  = local.core_state.etcd_password
+  }
 
   resources = {
     cpu = {
