@@ -17,6 +17,7 @@ module "renterd_cluster" {
   metrics_password = var.metrics_password
   etcd_username = local.core_state.etcd_username
   etcd_password = local.core_state.etcd_password
+  etcd_endpoints = [local.core_state.etcd_endpoint]
 
 
   # MySQL Configuration via ProxySQL
