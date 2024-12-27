@@ -26,6 +26,6 @@ module "prometheus" {
 
   promster_etcd_base_path = "/discovery/prometheus"
   promster_scrape_etcd_paths = [
-    "/mysql",
+    "portal-renterd-bus",
   ]
 }
