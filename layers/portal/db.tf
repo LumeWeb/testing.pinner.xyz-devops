@@ -11,6 +11,7 @@ module "mysql" {
 
   metrics_enabled = true
   metrics_password = var.metrics_password
+  metrics_service_name = "monitoring-mysql"
 
   etcd = {
     endpoints = [local.core_state.etcd_endpoint]
