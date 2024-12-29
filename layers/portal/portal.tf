@@ -94,7 +94,8 @@ module "portal" {
     password = var.redis_password
   }
 
-  metrics_service_name = "portal-renterd"
+  metrics_enabled = true
+  metrics_service_name = "portal"
   metrics_password = var.metrics_password
 
   environment          = local.environment
