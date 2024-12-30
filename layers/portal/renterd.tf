@@ -19,6 +19,8 @@ module "renterd_cluster" {
   etcd_password = local.core_state.etcd_password
   etcd_endpoints = [local.core_state.etcd_endpoint]
 
+  enable_s3 = false
+
 
   # MySQL Configuration via ProxySQL
   database = {
