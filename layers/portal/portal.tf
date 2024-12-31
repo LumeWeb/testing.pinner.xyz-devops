@@ -94,9 +94,9 @@ module "portal" {
     password = var.redis_password
   }
 
-  metrics_enabled = true
+  metrics_enabled      = true
   metrics_service_name = "portal"
-  metrics_password = var.metrics_password
+  metrics_password     = var.metrics_password
 
   environment          = local.environment
   placement_attributes = local.placement_attributes
@@ -104,8 +104,13 @@ module "portal" {
   extra_env_vars = {
     CLOUDNS_AUTH_ID       = var.cloudns_auth_id
     CLOUDNS_AUTH_PASSWORD = var.cloudns_auth_password
-    PORTAL__CORE__NODE_ID        = data.external.uuid_formatter[count.index].result.uuid
+    PORTAL__CORE__NODE_ID = data.external.uuid_formatter[count.index].result.uuid
   }
 
   ssl_email = var.ssl_email
+
+  caddy_s3_endpoint   = var.caddy_s3_endpoint
+  caddy_s3_bucket     = var.caddy_s3_bucket
+  caddy_s3_access_key = var.caddy_s3_access_key
+  caddy_s3_secret_key = var.caddy_s3_secret_key
 }
