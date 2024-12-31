@@ -99,7 +99,7 @@ variable "portal_buffer_bucket" {
 variable "portal_buffer_region" {
   description = "Portal buffer region"
   type        = string
-  default       = "us-east-1"
+  default     = "us-east-1"
 }
 
 variable "portal_buffer_access_key" {
@@ -168,6 +168,32 @@ variable "cloudns_auth_password" {
 
 variable "ssl_email" {
   description = "Email for SSL certificates"
+  type        = string
+  sensitive   = true
+}
+
+# Caddy S3 Configuration
+
+variable "caddy_s3_endpoint" {
+  description = "Caddy S3 endpoint"
+  type        = string
+  sensitive   = true
+}
+
+variable "caddy_s3_access_key" {
+  description = "Caddy S3 access key"
+  type        = string
+  sensitive   = true
+}
+
+variable "caddy_s3_secret_key" {
+  description = "Caddy S3 secret key"
+  type        = string
+  sensitive   = true
+}
+
+variable "caddy_s3_bucket" {
+  description = "Caddy S3 bucket"
   type        = string
   sensitive   = true
 }
